@@ -1,5 +1,7 @@
 package generator2;
 
+import java.util.List;
+
 public class MarkdownEntity implements ItemEntity {
 
     private String taskTitle;
@@ -12,7 +14,7 @@ public class MarkdownEntity implements ItemEntity {
         this.taskSolution = solution;
     }
 
-    public static MarkdownEntity parseEntity(String s) {
+    public static MarkdownEntity parseEntity(List<String> s) {
 
         //--parsing--//
 

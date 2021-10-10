@@ -10,7 +10,7 @@ public class IOUtil {
 
     static List<String> data = new ArrayList<>();
 
-    static void readData(String inPath) {
+    static List<String> readData(String inPath) {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(inPath))) {
             String line = bufferedReader.readLine();
             while (line != null) {
@@ -22,6 +22,7 @@ public class IOUtil {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+        return data;
     }
 
     static void writeData(String outPath, String data) {

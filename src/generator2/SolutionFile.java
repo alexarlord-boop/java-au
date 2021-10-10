@@ -10,7 +10,8 @@ public class SolutionFile {
         this.data = dataList;
     }
 
-    public SolutionFile parseFile(String outPath, String fileFormat, String fileName) {
+
+    public static SolutionFile parseFile(List<String> content, String fileFormat, String fileName) {
 
         //--parsing--//
 
