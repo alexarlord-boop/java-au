@@ -27,12 +27,12 @@ public class MarkdownEntity implements ItemEntity {
 
     @Override
     public String getTitle() {
-        return null;
+        return taskTitle;
     }
 
     @Override
     public String getFormatted() {
-        return null;
+        return taskSolution;
     }
 
 

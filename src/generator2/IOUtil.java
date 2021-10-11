@@ -8,9 +8,8 @@ import java.util.List;
 
 public class IOUtil {
 
-    static List<String> data = new ArrayList<>();
-
     static List<String> readData(String inPath) {
+        List<String> data = new ArrayList<>();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(inPath))) {
             String line = bufferedReader.readLine();
             while (line != null) {
@@ -22,6 +21,7 @@ public class IOUtil {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+        //System.out.println(data.toString());
         return data;
     }
 
