@@ -93,21 +93,24 @@ public class SolutionFile {
 
     @Override
     public String toString() {
+
+        //// cases realisation expected !
+
+        //// MarkDown only
         StringBuilder sB = new StringBuilder();
         StringJoiner jTitles = new StringJoiner("\n");
         StringJoiner jSolutions = new StringJoiner("\n\n");
         //--creating result string--//
         String[] titles = this.data.stream().map(ItemEntity::getTitle).toArray(String[]::new);
-        for (String title : titles) {
-            jTitles.add(title);
-        }
+        for (String title : titles) { jTitles.add(title); }
+
         String[] solutions = this.data.stream().map(ItemEntity::getFormatted).toArray(String[]::new);
-        for (String sol : solutions) {
-            jSolutions.add(sol);
-        }
-        sB.append(jTitles).append("\n").append(Solution.FileType.MARKDOWN.FCOMMENT())
-                .append("\n").
-                append(jSolutions);
+        for (String sol : solutions) { jSolutions.add(sol); }
+
+        sB.append("# ").append(this.fileName.toUpperCase()).append("\n\n").
+                append(jTitles).append("\n").
+                append(Solution.FileType.MARKDOWN.FCOMMENT()).
+                append("\n").append(jSolutions);
         //--creating result string--//
 
         return sB.toString();
