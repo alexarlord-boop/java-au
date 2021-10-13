@@ -29,12 +29,15 @@ public class Solution {
 //        ItemEntity someEntity = new MarkdownEntity("title", "url", "solution");
 //        List<ItemEntity> lst = new ArrayList<>();
 
-
+        String userSource = "C:\\Users\\Александр\\OneDrive\\Документы\\testFiles\\testInput.txt";
+        String source = "C:\\Users\\Александр\\OneDrive\\Документы\\testFiles\\testOutput.md";
         List<String> userSolutionContent = IOUtil.readData(userSource);
         List<String> oldFileContent = IOUtil.readData(source);
 //        String[] parts = source.split("\\.");
         SolutionFile old = SolutionFile.parseFile(oldFileContent, FileType.MARKDOWN, "testOutput");
-//        old.add(MarkdownEntity.parseEntity(userSolutionContent));
+        MarkdownEntity entity = MarkdownEntity.parseEntity(userSolutionContent);
+        old.add(entity);
+        System.out.println(old.toString());
 //        IOUtil.writeData(source, old.toString());
     }
 }
