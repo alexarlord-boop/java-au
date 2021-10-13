@@ -38,6 +38,6 @@ public class Solution {
         MarkdownEntity entity = MarkdownEntity.parseEntity(userSolutionContent);
         old.add(entity);
         System.out.println(old.toString());
-//        IOUtil.writeData(source, old.toString());
+        IOUtil.writeData(source, old.toString());
     }
 }

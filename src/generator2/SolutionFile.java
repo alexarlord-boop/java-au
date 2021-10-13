@@ -110,7 +110,7 @@ public class SolutionFile {
         sB.append("# ").append(this.fileName.toUpperCase()).append("\n\n").
                 append(jTitles).append("\n").
                 append(Solution.FileType.MARKDOWN.FCOMMENT()).
-                append("\n").append(jSolutions);
+                append("\n\n").append(jSolutions);
         //--creating result string--//
 
         return sB.toString();
