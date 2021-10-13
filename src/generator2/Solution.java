@@ -33,11 +33,10 @@ public class Solution {
         String source = "C:\\Users\\Александр\\OneDrive\\Документы\\testFiles\\testOutput.md";
         List<String> userSolutionContent = IOUtil.readData(userSource);
         List<String> oldFileContent = IOUtil.readData(source);
-//        String[] parts = source.split("\\.");
+
         SolutionFile old = SolutionFile.parseFile(oldFileContent, FileType.MARKDOWN, "testOutput");
         MarkdownEntity entity = MarkdownEntity.parseEntity(userSolutionContent);
         old.add(entity);
-        System.out.println(old.toString());
         IOUtil.writeData(source, old.toString());
     }
 }

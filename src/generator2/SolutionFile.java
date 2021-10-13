@@ -67,36 +67,7 @@ public class SolutionFile {
         return lst;
     }
 
-    public static SolutionFile parseFile(List<String> content, Solution.FileType fileFormat, String fileName) {
-        //--parsing--//
-        List<ItemEntity> dataList = new ArrayList<ItemEntity>();    // sample data
-        switch (fileFormat) {
-            case MARKDOWN: {
-                dataList = parseMD(content);
-            }
-        }
-        //--parsing--//
-
-
-        return new SolutionFile(dataList, fileFormat, fileName);
-    }
-
-    public List<ItemEntity> add(MarkdownEntity new_item) {
-        // working with this.data
-
-        //--addition--//
-        this.data.add(new_item);
-        //--addition--//
-
-        return this.data;
-    }
-
-    @Override
-    public String toString() {
-
-        //// cases realisation expected !
-
-        //// MarkDown only
+    private String mdToString(){
         StringBuilder sB = new StringBuilder();
         StringJoiner jTitles = new StringJoiner("\n");
         StringJoiner jSolutions = new StringJoiner("\n\n");
@@ -111,9 +82,56 @@ public class SolutionFile {
                 append(jTitles).append("\n").
                 append(Solution.FileType.MARKDOWN.FCOMMENT()).
                 append("\n\n").append(jSolutions);
+        return sB.toString();
+    }
+
+    public static SolutionFile parseFile(List<String> content, Solution.FileType fileFormat, String fileName) {
+        //// cases realisation expected !
+
+        //--parsing--//
+        List<ItemEntity> dataList = new ArrayList<ItemEntity>();    // sample data
+        switch (fileFormat) {
+            case MARKDOWN: {
+                dataList = parseMD(content);
+            }
+            break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + fileFormat);
+        }
+        //--parsing--//
+
+
+        return new SolutionFile(dataList, fileFormat, fileName);
+    }
+
+    public List<ItemEntity> add(ItemEntity new_item) {
+        //// working with this.data
+
+        //--addition--//
+        this.data.add(new_item);
+        //--addition--//
+
+        return this.data;
+    }
+
+    @Override
+    public String toString() {
+
+        //// cases realisation expected !
+        String result;
+        //// MarkDown only
+        switch (fileFormat) {
+            case MARKDOWN: {
+                result = mdToString();
+            }
+            break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + fileFormat);
+        }
+
         //--creating result string--//
 
-        return sB.toString();
+        return result;
     }
 
 }
