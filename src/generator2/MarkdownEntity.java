@@ -6,7 +6,7 @@ import java.util.StringJoiner;
 public class MarkdownEntity implements ItemEntity {
 
     private final String taskTitle;
-    private String taskUrl;    //// refactor getFormatted method
+    private String taskUrl;    //// refactor parseEntity method
     private final String taskSolution;
 
     public MarkdownEntity(String title, String url, String solution) {
@@ -18,43 +18,25 @@ public class MarkdownEntity implements ItemEntity {
     public static MarkdownEntity parseEntity(List<String> s) {
         String title = s.get(0);
         String url = s.get(2);
-        int d = s.size();
-        List<String> solution = s.subList(3, d);
-
-        String resTitle;
+        List<String> solution = s.subList(3, s.size());
         String resSolution;
 
-        //--parsing--//
-        String lnkName = url.split("/")[4];
-        StringBuilder sB = new StringBuilder("+ [").append(title).append("]").append("(#").
-                append(lnkName).append(")");
-        resTitle = sB.toString();
+        resSolution = "```python" + String.join("\n", solution) + "```\n";
 
-        sB.setLength(0);
-        StringJoiner sJ = new StringJoiner("\n");
-        for (String line : solution) {
-            sJ.add(line);
-        }
-
-        sB.append("## ").append(title).append("\n\n").append(url).append("\n\n").
-                append("```python").append(sJ.toString()).append("```\n");
-
-        resSolution = sB.toString();
-
-        //--parsing--//
-
-
-        return new MarkdownEntity(resTitle, url, resSolution);
+        return new MarkdownEntity(title, url, resSolution);
     }
 
     @Override
     public String getTitle() {
-        return taskTitle;
+        return "+ [" + this.taskTitle + "]" +
+                "(#" + this.taskUrl.split("/")[4] + ")";
     }
 
     @Override
     public String getFormatted() {
-        return taskSolution;
+        StringBuilder sB = new StringBuilder();
+        sB.append("## ").append(this.taskTitle).append("\n\n").append(this.taskUrl).append("\n\n").append(this.taskSolution);
+        return sB.toString();
     }
 
 

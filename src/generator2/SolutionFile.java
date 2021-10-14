@@ -1,10 +1,7 @@
 package generator2;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.StringJoiner;
-import java.util.stream.Stream;
 
 public class SolutionFile {
 
@@ -34,18 +31,20 @@ public class SolutionFile {
                 continue;
             }
             if ((content.indexOf(line) < delimeterId) && (line.contains("+"))) {
-                titles.add(line);
+                titles.add(line.split("[\\[\\]]")[1]);
                 continue;
             }
             if (line.contains("##")) {
                 taskId += 1;
                 StringBuilder sB = new StringBuilder();
-                sB.append(line).append("\n\n");
                 formattedTasksLines.add("");
+
+                //// second link line !!!
 
                 while (!(line.equals("```"))) {
                     if (line.contains("https")) {
                         links.add(line);
+                        continue;
                     }
                     i++;
                     line = content.get(i + 1);
@@ -87,14 +86,8 @@ public class SolutionFile {
         return new SolutionFile(dataList, fileFormat, fileName);
     }
 
-    public List<ItemEntity> add(ItemEntity new_item) {
-        //// working with this.data
-
-        //--addition--//
+    public void add(ItemEntity new_item) {
         this.data.add(new_item);
-        //--addition--//
-
-        return this.data;
     }
 
     private String mdToString() {
