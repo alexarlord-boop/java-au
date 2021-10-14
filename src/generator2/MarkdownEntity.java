@@ -20,7 +20,7 @@ public class MarkdownEntity implements ItemEntity {
         List<String> solution = s.subList(3, s.size());
         String resSolution;
 
-        resSolution = "```python" + String.join("\n", solution) + "```\n";
+        resSolution = "```java" + String.join("\n", solution) + "```\n";
 
         return new MarkdownEntity(title, url, resSolution);
     }
