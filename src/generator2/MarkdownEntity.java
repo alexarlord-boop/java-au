@@ -15,12 +15,8 @@ public class MarkdownEntity implements ItemEntity {
     }
 
     public static MarkdownEntity parseEntity(List<String> s) {
-        String title = s.get(0);
-        String url = s.get(2);
-        List<String> solution = s.subList(3, s.size());
-        String resSolution;
-        resSolution = "```java" + String.join("\n", solution) + "```\n";
-        return new MarkdownEntity(title, url, resSolution);
+        String solution = "```java" + String.join("\n", s.subList(3, s.size())) + "```\n";
+        return new MarkdownEntity(s.get(0), s.get(2), solution);
     }
 
     @Override

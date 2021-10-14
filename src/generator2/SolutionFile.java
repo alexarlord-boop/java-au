@@ -82,10 +82,8 @@ public class SolutionFile {
         String titles = String.join("\n", this.data.stream().map(ItemEntity::getTitle).toArray(String[]::new));
         String solutions = String.join("\n\n", this.data.stream().map(ItemEntity::getFormatted).toArray(String[]::new));
 
-        sB.append("# ").append(this.fileName.toUpperCase()).append("\n\n").
-                append(titles).append("\n").
-                append(Solution.FileType.MARKDOWN.FCOMMENT()).
-                append("\n\n").append(solutions);
+        sB.append("# ").append(this.fileName.toUpperCase()).append("\n\n").append(titles).append("\n").
+                append(Solution.FileType.MARKDOWN.FCOMMENT()).append("\n\n").append(solutions);
         return sB.toString();
     }
 
