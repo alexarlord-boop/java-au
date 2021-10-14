@@ -1,12 +1,11 @@
 package generator2;
 
 import java.util.List;
-import java.util.StringJoiner;
 
 public class MarkdownEntity implements ItemEntity {
 
     private final String taskTitle;
-    private String taskUrl;    //// refactor parseEntity method
+    private final String taskUrl;
     private final String taskSolution;
 
     public MarkdownEntity(String title, String url, String solution) {
@@ -34,9 +33,7 @@ public class MarkdownEntity implements ItemEntity {
 
     @Override
     public String getFormatted() {
-        StringBuilder sB = new StringBuilder();
-        sB.append("## ").append(this.taskTitle).append("\n\n").append(this.taskUrl).append("\n\n").append(this.taskSolution);
-        return sB.toString();
+        return "## " + this.taskTitle + "\n\n" + this.taskUrl + "\n\n" + this.taskSolution;
     }
 
 

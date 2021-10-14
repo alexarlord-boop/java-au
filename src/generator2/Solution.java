@@ -28,8 +28,8 @@ public class Solution {
     }
 
     public static void main(String[] args) {
-        String userSource = "";
-        String source = "";
+        String userSource = "C:\\Users\\Александр\\OneDrive\\Документы\\testFiles\\testInput.txt";
+        String source = "C:\\Users\\Александр\\OneDrive\\Документы\\testFiles\\testOutput.md";
         List<String> userSolutionContent = IOUtil.readData(userSource);
         List<String> oldFileContent = IOUtil.readData(source);
 
