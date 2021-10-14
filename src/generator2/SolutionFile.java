@@ -5,9 +5,9 @@ import java.util.List;
 
 public class SolutionFile {
 
-    private List<ItemEntity> data;
-    private Solution.FileType fileFormat;
-    private String fileName;
+    private final List<ItemEntity> data;
+    private final Solution.FileType fileFormat;
+    private final String fileName;
 
     public SolutionFile(List<ItemEntity> dataList, Solution.FileType fileFormat, String fileName) {
         this.data = dataList;
@@ -19,69 +19,66 @@ public class SolutionFile {
         List<ItemEntity> lst = new ArrayList<>();
         List<String> titles = new ArrayList<>();
         List<String> links = new ArrayList<>();
-        List<String> formattedTasksLines = new ArrayList<>();
 
 
         int contentSize = content.size();
-        int taskId = -1;
+        int taskCount = 0;
         int delimeterId = content.indexOf(Solution.FileType.MARKDOWN.FCOMMENT());
-        for (int i = 0; i < contentSize; i++) {
+        int i = 0;
+        while (i < delimeterId) {
             String line = content.get(i);
-            if (line.equals(Solution.FileType.MARKDOWN.FCOMMENT())) {
-                continue;
-            }
-            if ((content.indexOf(line) < delimeterId) && (line.contains("+"))) {
+            if (line.contains("+ [")) {
                 titles.add(line.split("[\\[\\]]")[1]);
-                continue;
             }
-            if (line.contains("##")) {
-                taskId += 1;
-                StringBuilder sB = new StringBuilder();
-                formattedTasksLines.add("");
-
-                //// second link line !!!
-
-                while (!(line.equals("```"))) {
-                    if (line.contains("https")) {
-                        links.add(line);
-                        continue;
-                    }
-                    i++;
-                    line = content.get(i + 1);
-                    if (line.equals("```")) {
-                        sB.append(line);
-                        formattedTasksLines.set(formattedTasksLines.size() - 1, sB.toString());
-
-                        ItemEntity enity = new MarkdownEntity(titles.get(taskId), links.get(taskId), formattedTasksLines.get(taskId));
-                        lst.add(enity);
-                        break;
-
-                    } else {
-                        sB.append(line);
-                        sB.append("\n");
-                        formattedTasksLines.set(formattedTasksLines.size() - 1, sB.toString());
-                    }
-                }
-            }
+            i++;
         }
+        i++;
+        while (i > delimeterId && i < contentSize) {
+            String line = content.get(i);
+            if (line.contains("http")) {
+                links.add(line);
+                i++;
+            } else if (line.contains("```python")) {
+                StringBuilder sB = new StringBuilder();
+                while (!line.equals("```")) {
+                    line = content.get(i);
+                    sB.append(line).append("\n");
+                    i++;
+                }
+                ItemEntity entity = new MarkdownEntity(titles.get(taskCount), links.get(taskCount), sB.toString());
+                taskCount++;
+                lst.add(entity);
+            }
+            i++;
+        }
+
+        return lst;
+    }
+
+    private static List<ItemEntity> parseHTML(List<String> content) {
+        List<ItemEntity> lst = new ArrayList<>();
+        return lst;
+    }
+
+    private static List<ItemEntity> parseLATEX(List<String> content) {
+        List<ItemEntity> lst = new ArrayList<>();
         return lst;
     }
 
     public static SolutionFile parseFile(List<String> content, Solution.FileType fileFormat, String fileName) {
-        //// cases realisation expected !
-
-        //--parsing--//
-        List<ItemEntity> dataList = new ArrayList<ItemEntity>();    // sample data
+        List<ItemEntity> dataList = new ArrayList<ItemEntity>();
         switch (fileFormat) {
-            case MARKDOWN: {
+            case MARKDOWN -> {
                 dataList = parseMD(content);
             }
-            break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + fileFormat);
+            case HTML -> {
+                dataList = parseHTML(content);
+            }
+            case LATEX -> {
+                dataList = parseLATEX(content);
+            }
+            default -> throw new IllegalStateException("Unexpected value: " + fileFormat);
         }
-        //--parsing--//
-
 
         return new SolutionFile(dataList, fileFormat, fileName);
     }
@@ -114,25 +111,20 @@ public class SolutionFile {
 
     @Override
     public String toString() {
-
         String result;
         switch (fileFormat) {
-            case MARKDOWN: {
+            case MARKDOWN -> {
                 result = mdToString();
             }
-            break;
-            case HTML: {
+            case HTML -> {
                 result = htmlToString();
             }
-            break;
-            case LATEX: {
+            case LATEX -> {
                 result = texToString();
             }
-            default:
-                throw new IllegalStateException("Unexpected value: " + fileFormat);
+            default -> throw new IllegalStateException("Unexpected value: " + fileFormat);
         }
 
         return result;
     }
-
 }
