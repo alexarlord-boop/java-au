@@ -1,6 +1,5 @@
 package generator2;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Solution {
@@ -8,8 +7,7 @@ public class Solution {
     enum FileType {
         MARKDOWN("md", "<!---->"),
         HTML("html", "<!---->"),
-        LATEX("tex", "%----")
-        ;
+        LATEX("tex", "%----");
 
         private final String ftp;
         private final String fcomment;
@@ -30,11 +28,8 @@ public class Solution {
     }
 
     public static void main(String[] args) {
-//        ItemEntity someEntity = new MarkdownEntity("title", "url", "solution");
-//        List<ItemEntity> lst = new ArrayList<>();
-
-        String userSource = "C:\\Users\\Александр\\OneDrive\\Документы\\testFiles\\testInput.txt";
-        String source = "C:\\Users\\Александр\\OneDrive\\Документы\\testFiles\\testOutput.md";
+        String userSource = "";
+        String source = "";
         List<String> userSolutionContent = IOUtil.readData(userSource);
         List<String> oldFileContent = IOUtil.readData(source);
 
