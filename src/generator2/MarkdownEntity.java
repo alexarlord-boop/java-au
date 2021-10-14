@@ -1,12 +1,13 @@
 package generator2;
 
 import java.util.List;
+import java.util.StringJoiner;
 
 public class MarkdownEntity implements ItemEntity {
 
-    private String taskTitle;
-    private String taskUrl;
-    private String taskSolution;
+    private final String taskTitle;
+    private String taskUrl;    //// refactor parseEntity method
+    private final String taskSolution;
 
     public MarkdownEntity(String title, String url, String solution) {
         this.taskTitle = title;
@@ -15,24 +16,27 @@ public class MarkdownEntity implements ItemEntity {
     }
 
     public static MarkdownEntity parseEntity(List<String> s) {
+        String title = s.get(0);
+        String url = s.get(2);
+        List<String> solution = s.subList(3, s.size());
+        String resSolution;
 
-        //--parsing--//
+        resSolution = "```python" + String.join("\n", solution) + "```\n";
 
-        String title = "sample title";
-        String url = "sample url";
-        String solution = "sample solution";
-
-        return new MarkdownEntity(title, url, solution);
+        return new MarkdownEntity(title, url, resSolution);
     }
 
     @Override
     public String getTitle() {
-        return taskTitle;
+        return "+ [" + this.taskTitle + "]" +
+                "(#" + this.taskUrl.split("/")[4] + ")";
     }
 
     @Override
     public String getFormatted() {
-        return taskSolution;
+        StringBuilder sB = new StringBuilder();
+        sB.append("## ").append(this.taskTitle).append("\n\n").append(this.taskUrl).append("\n\n").append(this.taskSolution);
+        return sB.toString();
     }
 
 
