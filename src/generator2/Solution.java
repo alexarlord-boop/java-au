@@ -6,12 +6,15 @@ import java.util.List;
 public class Solution {
 
     enum FileType {
-        MARKDOWN("md", "<!---->"), HTML("html", "<!---->");
+        MARKDOWN("md", "<!---->"),
+        HTML("html", "<!---->"),
+        LATEX("tex", "%----")
+        ;
 
         private final String ftp;
         private final String fcomment;
 
-        FileType(String tp, String comment){
+        FileType(String tp, String comment) {
             ftp = tp;
             fcomment = comment;
         }
@@ -19,6 +22,7 @@ public class Solution {
         public String FTYPE() {
             return ftp;
         }
+
         public String FCOMMENT() {
             return fcomment;
         }

@@ -1,6 +1,7 @@
 package generator2;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.StringJoiner;
 import java.util.stream.Stream;
@@ -67,24 +68,6 @@ public class SolutionFile {
         return lst;
     }
 
-    private String mdToString(){
-        StringBuilder sB = new StringBuilder();
-        StringJoiner jTitles = new StringJoiner("\n");
-        StringJoiner jSolutions = new StringJoiner("\n\n");
-        //--creating result string--//
-        String[] titles = this.data.stream().map(ItemEntity::getTitle).toArray(String[]::new);
-        for (String title : titles) { jTitles.add(title); }
-
-        String[] solutions = this.data.stream().map(ItemEntity::getFormatted).toArray(String[]::new);
-        for (String sol : solutions) { jSolutions.add(sol); }
-
-        sB.append("# ").append(this.fileName.toUpperCase()).append("\n\n").
-                append(jTitles).append("\n").
-                append(Solution.FileType.MARKDOWN.FCOMMENT()).
-                append("\n\n").append(jSolutions);
-        return sB.toString();
-    }
-
     public static SolutionFile parseFile(List<String> content, Solution.FileType fileFormat, String fileName) {
         //// cases realisation expected !
 
@@ -114,22 +97,47 @@ public class SolutionFile {
         return this.data;
     }
 
+    private String mdToString() {
+        StringBuilder sB = new StringBuilder();
+
+        String titles = String.join("\n", this.data.stream().map(ItemEntity::getTitle).toArray(String[]::new));
+        String solutions = String.join("\n\n", this.data.stream().map(ItemEntity::getFormatted).toArray(String[]::new));
+
+        sB.append("# ").append(this.fileName.toUpperCase()).append("\n\n").
+                append(titles).append("\n").
+                append(Solution.FileType.MARKDOWN.FCOMMENT()).
+                append("\n\n").append(solutions);
+
+        return sB.toString();
+    }
+
+    private String htmlToString() {
+        return null;
+    }
+
+    private String texToString() {
+        return null;
+    }
+
     @Override
     public String toString() {
 
-        //// cases realisation expected !
         String result;
-        //// MarkDown only
         switch (fileFormat) {
             case MARKDOWN: {
                 result = mdToString();
             }
             break;
+            case HTML: {
+                result = htmlToString();
+            }
+            break;
+            case LATEX: {
+                result = texToString();
+            }
             default:
                 throw new IllegalStateException("Unexpected value: " + fileFormat);
         }
-
-        //--creating result string--//
 
         return result;
     }

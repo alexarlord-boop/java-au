@@ -5,9 +5,9 @@ import java.util.StringJoiner;
 
 public class MarkdownEntity implements ItemEntity {
 
-    private String taskTitle;
-    private String taskUrl;
-    private String taskSolution;
+    private final String taskTitle;
+    private String taskUrl;    //// refactor getFormatted method
+    private final String taskSolution;
 
     public MarkdownEntity(String title, String url, String solution) {
         this.taskTitle = title;
@@ -32,7 +32,7 @@ public class MarkdownEntity implements ItemEntity {
 
         sB.setLength(0);
         StringJoiner sJ = new StringJoiner("\n");
-        for (String line : solution){
+        for (String line : solution) {
             sJ.add(line);
         }
 
