@@ -38,7 +38,7 @@ public class SolutionFile {
             if (line.contains("http")) {
                 links.add(line);
                 i++;
-            } else if (line.contains("```python")) {
+            } else if (line.contains("```java")) {
                 StringBuilder sB = new StringBuilder();
                 while (!line.equals("```")) {
                     line = content.get(i);
