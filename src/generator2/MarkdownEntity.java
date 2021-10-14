@@ -5,7 +5,7 @@ import java.util.List;
 public class MarkdownEntity implements ItemEntity {
 
     private final String taskTitle;
-    private final String taskUrl;    //// refactor parseEntity method
+    private final String taskUrl;
     private final String taskSolution;
 
     public MarkdownEntity(String title, String url, String solution) {
@@ -19,22 +19,17 @@ public class MarkdownEntity implements ItemEntity {
         String url = s.get(2);
         List<String> solution = s.subList(3, s.size());
         String resSolution;
-
         resSolution = "```java" + String.join("\n", solution) + "```\n";
-
         return new MarkdownEntity(title, url, resSolution);
     }
 
     @Override
     public String getTitle() {
-        return "+ [" + this.taskTitle + "]" +
-                "(#" + this.taskUrl.split("/")[4] + ")";
+        return "+ [" + this.taskTitle + "]" + "(#" + this.taskUrl.split("/")[4] + ")";
     }
 
     @Override
     public String getFormatted() {
         return "## " + this.taskTitle + "\n\n" + this.taskUrl + "\n\n" + this.taskSolution;
     }
-
-
 }

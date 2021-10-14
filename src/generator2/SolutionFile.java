@@ -20,7 +20,6 @@ public class SolutionFile {
         List<String> titles = new ArrayList<>();
         List<String> links = new ArrayList<>();
 
-
         int contentSize = content.size();
         int taskCount = 0;
         int delimeterId = content.indexOf(Solution.FileType.MARKDOWN.FCOMMENT());
@@ -45,13 +44,11 @@ public class SolutionFile {
                     sB.append(line).append("\n");
                     i++;
                 }
-                ItemEntity entity = new MarkdownEntity(titles.get(taskCount), links.get(taskCount), sB.toString());
+                lst.add(new MarkdownEntity(titles.get(taskCount), links.get(taskCount), sB.toString()));
                 taskCount++;
-                lst.add(entity);
             }
             i++;
         }
-
         return lst;
     }
 
@@ -66,20 +63,13 @@ public class SolutionFile {
     }
 
     public static SolutionFile parseFile(List<String> content, Solution.FileType fileFormat, String fileName) {
-        List<ItemEntity> dataList = new ArrayList<ItemEntity>();
+        List<ItemEntity> dataList;
         switch (fileFormat) {
-            case MARKDOWN -> {
-                dataList = parseMD(content);
-            }
-            case HTML -> {
-                dataList = parseHTML(content);
-            }
-            case LATEX -> {
-                dataList = parseLATEX(content);
-            }
+            case MARKDOWN -> dataList = parseMD(content);
+            case HTML -> dataList = parseHTML(content);
+            case LATEX -> dataList = parseLATEX(content);
             default -> throw new IllegalStateException("Unexpected value: " + fileFormat);
         }
-
         return new SolutionFile(dataList, fileFormat, fileName);
     }
 
@@ -89,7 +79,6 @@ public class SolutionFile {
 
     private String mdToString() {
         StringBuilder sB = new StringBuilder();
-
         String titles = String.join("\n", this.data.stream().map(ItemEntity::getTitle).toArray(String[]::new));
         String solutions = String.join("\n\n", this.data.stream().map(ItemEntity::getFormatted).toArray(String[]::new));
 
@@ -97,7 +86,6 @@ public class SolutionFile {
                 append(titles).append("\n").
                 append(Solution.FileType.MARKDOWN.FCOMMENT()).
                 append("\n\n").append(solutions);
-
         return sB.toString();
     }
 
@@ -113,18 +101,11 @@ public class SolutionFile {
     public String toString() {
         String result;
         switch (fileFormat) {
-            case MARKDOWN -> {
-                result = mdToString();
-            }
-            case HTML -> {
-                result = htmlToString();
-            }
-            case LATEX -> {
-                result = texToString();
-            }
+            case MARKDOWN -> result = mdToString();
+            case HTML -> result = htmlToString();
+            case LATEX -> result = texToString();
             default -> throw new IllegalStateException("Unexpected value: " + fileFormat);
         }
-
         return result;
     }
 }

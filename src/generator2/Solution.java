@@ -28,8 +28,7 @@ public class Solution {
         List<String> oldFileContent = IOUtil.readData(source);
 
         SolutionFile old = SolutionFile.parseFile(oldFileContent, FileType.MARKDOWN, "testOutput");
-        MarkdownEntity entity = MarkdownEntity.parseEntity(userSolutionContent);
-        old.add(entity);
+        old.add(MarkdownEntity.parseEntity(userSolutionContent));
         IOUtil.writeData(source, old.toString());
     }
 }
