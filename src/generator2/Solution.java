@@ -5,20 +5,14 @@ import java.util.List;
 public class Solution {
 
     enum FileType {
-        MARKDOWN("md", "<!---->"),
-        HTML("html", "<!---->"),
-        LATEX("tex", "%----");
+        MARKDOWN("<!---->"),
+        HTML("<!---->"),
+        LATEX("%----");
 
-        private final String ftp;
         private final String fcomment;
 
-        FileType(String tp, String comment) {
-            ftp = tp;
+        FileType(String comment) {
             fcomment = comment;
-        }
-
-        public String FTYPE() {
-            return ftp;
         }
 
         public String FCOMMENT() {
