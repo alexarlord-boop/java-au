@@ -39,18 +39,18 @@ class SolutionFileTest {
 
     @Test
     void testNotEmptyMarkdownFile() {
-        SolutionFile result = SolutionFile.parseFile(NOT_EMPTY_FILE_CONTENT, Solution.FileType.MARKDOWN, "output");
+        SolutionFile res = SolutionFile.parseFile(NOT_EMPTY_FILE_CONTENT, Solution.FileType.MARKDOWN, "output");
         List<ItemEntity> lst = List.of(new MarkdownEntity(TITLE, URL, SOLUTION));
         SolutionFile expect = new SolutionFile(lst, Solution.FileType.MARKDOWN, "output");
-        assertEquals(expect, result);
+        assertEquals(expect, res);
     }
 
     @Test
     void testEmptyMarkdownFile() {
-        SolutionFile result = SolutionFile.parseFile(EMPTY_FILE_CONTENT, Solution.FileType.MARKDOWN, "output");
+        SolutionFile res = SolutionFile.parseFile(EMPTY_FILE_CONTENT, Solution.FileType.MARKDOWN, "output");
         List<ItemEntity> lst = List.of();
         SolutionFile expect = new SolutionFile(lst, Solution.FileType.MARKDOWN, "output");
-        assertEquals(expect, result);
+        assertEquals(expect, res);
     }
 
     @Test
