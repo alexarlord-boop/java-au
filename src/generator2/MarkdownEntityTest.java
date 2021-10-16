@@ -38,6 +38,12 @@ class MarkdownEntityTest {
         assertEquals(expect, res);
     }
 
+    @Test
+    void testParseEmptyEntity() {
+        MarkdownEntity expect = new MarkdownEntity("", "", "");
+        MarkdownEntity res = MarkdownEntity.parseEntity(Collections.singletonList(""));
+        assertEquals(expect, res);
+    }
 
     @Test
     void testGetTitle() {
