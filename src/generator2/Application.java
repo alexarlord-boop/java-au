@@ -30,9 +30,9 @@ public class Application {
     public static void main(String[] args) {
         String userSource = "";
         String source = "";
-        List<String> userSolutionContent = IOUtil.readData(userSource);
-        List<String> oldFileContent = IOUtil.readData(source);
+        List<String> newContent = IOUtil.readData(userSource);
+        List<String> oldContent = IOUtil.readData(source);
 
-        IOUtil.writeData(source, generateContent(oldFileContent, userSolutionContent, FileType.MARKDOWN, "output"));
+        IOUtil.writeData(source, generateContent(oldContent, newContent, FileType.MARKDOWN, "output"));
     }
 }
