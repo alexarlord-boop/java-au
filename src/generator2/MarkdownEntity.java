@@ -1,6 +1,7 @@
 package generator2;
 
 import java.util.List;
+import java.util.Objects;
 
 public class MarkdownEntity implements ItemEntity {
 
@@ -28,4 +29,13 @@ public class MarkdownEntity implements ItemEntity {
     public String getFormatted() {
         return "## " + this.taskTitle + "\n\n" + this.taskUrl + "\n\n" + this.taskSolution;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MarkdownEntity that = (MarkdownEntity) o;
+        return Objects.equals(taskTitle, that.taskTitle) && Objects.equals(taskUrl, that.taskUrl) && Objects.equals(taskSolution, that.taskSolution);
+    }
+
 }

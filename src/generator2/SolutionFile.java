@@ -2,10 +2,11 @@ package generator2;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class SolutionFile {
 
-    private final List<ItemEntity> data;
+    final List<ItemEntity> data;
     private final Solution.FileType fileFormat;
     private final String fileName;
 
@@ -16,6 +17,7 @@ public class SolutionFile {
     }
 
     private static List<ItemEntity> parseMD(List<String> content) {
+        System.out.println("entered PARSER");
         List<ItemEntity> lst = new ArrayList<>();
         List<String> titles = new ArrayList<>();
         List<String> links = new ArrayList<>();
@@ -26,6 +28,7 @@ public class SolutionFile {
         int i = 0;
         while (i < delimeterId) {
             String line = content.get(i);
+            System.out.println(line);
             if (line.contains("+ [")) {
                 titles.add(line.split("[\\[\\]]")[1]);
             }
@@ -70,6 +73,8 @@ public class SolutionFile {
             case LATEX -> dataList = parseLATEX(content);
             default -> throw new IllegalStateException("Unexpected value: " + fileFormat);
         }
+        System.out.println(dataList);
+
         return new SolutionFile(dataList, fileFormat, fileName);
     }
 
@@ -105,5 +110,13 @@ public class SolutionFile {
             default -> throw new IllegalStateException("Unexpected value: " + fileFormat);
         }
         return result;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SolutionFile that = (SolutionFile) o;
+        return Objects.equals(data, that.data) && fileFormat == that.fileFormat && Objects.equals(fileName, that.fileName);
     }
 }
