@@ -10,12 +10,14 @@ class SolutionFileTest {
     public static final List<String> MD_EMPTY_FILE_CONTENT = Collections.singletonList("");
     public static final String MD_TITLE = "Reverse Linked List";
     public static final String MD_URL = "https://leetcode.com/problems/reverse-linked-list/";
-    public static final String MD_SOLUTION = "```java\n" +
-            "while head != None:\n" +
-            "    prev = head\n" +
-            "    head = n_node\n" +
-            "return prev\n" +
-            "```" + "\n";
+    public static final String MD_SOLUTION = """
+            ```java
+            while head != None:
+                prev = head
+                head = n_node
+            return prev
+            ```
+            """;
 
     public static final String MD_RESULT_STRING = "# OUTPUT\n\n" +
             "+ ["+ MD_TITLE + "](#reverse-linked-list)\n" +
