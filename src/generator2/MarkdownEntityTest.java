@@ -18,7 +18,8 @@ class MarkdownEntityTest {
                 prev = head
                 head = n_node
             return prev
-            ```\n""";
+            ```
+            """;
     public static final List<String> ENTITY_CONTENT = Arrays.asList("Reverse Linked List",
             "\n",
             "https://leetcode.com/problems/reverse-linked-list/",
@@ -28,23 +29,12 @@ class MarkdownEntityTest {
             "    head = n_node",
             "return prev\n");
 
-    @Test
-    void parseEntity() {
-        MarkdownEntity expect = new MarkdownEntity(TITLE, URL, SOLUTION);
-        MarkdownEntity res = MarkdownEntity.parseEntity(ENTITY_CONTENT);
-        assertEquals(expect, res);
-    }
-
-    @Test
-    void getTitle() {
-    }
-
-    @Test
-    void getFormatted() {
-    }
 
     @Test
     void testParseEntity() {
+        MarkdownEntity expect = new MarkdownEntity(TITLE, URL, SOLUTION);
+        MarkdownEntity res = MarkdownEntity.parseEntity(ENTITY_CONTENT);
+        assertEquals(expect, res);
     }
 
     @Test
