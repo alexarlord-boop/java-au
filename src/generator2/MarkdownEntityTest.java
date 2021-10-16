@@ -28,6 +28,7 @@ class MarkdownEntityTest {
             "    prev = head",
             "    head = n_node",
             "return prev\n");
+
     public static final String RESULT_TITLE = "+ [Reverse Linked List](#reverse-linked-list)";
     public static final String RESULT_FORMATTED = "## " + TITLE + "\n\n" + URL + "\n\n" + SOLUTION;
 
