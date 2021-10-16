@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -28,7 +29,7 @@ class MarkdownEntityTest {
             "    prev = head",
             "    head = n_node",
             "return prev\n");
-
+    public static final String RESULT_TITLE = "+ [Reverse Linked List](#reverse-linked-list)";
 
     @Test
     void testParseEntity() {
@@ -37,8 +38,11 @@ class MarkdownEntityTest {
         assertEquals(expect, res);
     }
 
+
     @Test
     void testGetTitle() {
+        MarkdownEntity res = MarkdownEntity.parseEntity(ENTITY_CONTENT);
+        assertEquals(RESULT_TITLE, res.getTitle());
     }
 
     @Test
