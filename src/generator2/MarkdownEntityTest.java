@@ -2,7 +2,6 @@ package generator2;
 
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -32,7 +31,7 @@ class MarkdownEntityTest {
     public static final String RESULT_TITLE = "+ [Reverse Linked List](#reverse-linked-list)";
 
     @Test
-    void testParseEntity() {
+    void testParseNotEmptyEntity() {
         MarkdownEntity expect = new MarkdownEntity(TITLE, URL, SOLUTION);
         MarkdownEntity res = MarkdownEntity.parseEntity(ENTITY_CONTENT);
         assertEquals(expect, res);
