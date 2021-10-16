@@ -29,6 +29,7 @@ class MarkdownEntityTest {
             "    head = n_node",
             "return prev\n");
     public static final String RESULT_TITLE = "+ [Reverse Linked List](#reverse-linked-list)";
+    public static final String RESULT_FORMATTED = "## " + TITLE + "\n\n" + URL + "\n\n" + SOLUTION;
 
     @Test
     void testParseNotEmptyEntity() {
@@ -52,5 +53,7 @@ class MarkdownEntityTest {
 
     @Test
     void testGetFormatted() {
+        MarkdownEntity res = MarkdownEntity.parseEntity(ENTITY_CONTENT);
+        assertEquals(RESULT_FORMATTED, res.getFormatted());
     }
 }
