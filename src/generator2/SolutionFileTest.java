@@ -17,20 +17,24 @@ class SolutionFileTest {
             "return prev\n" +
             "```" + "\n";
 
+    public static final String RESULT_STRING = "# OUTPUT\n\n" +
+            "+ ["+ TITLE + "](#reverse-linked-list)\n" +
+            "<!---->\n\n" + "## " + TITLE + "\n\n" + URL + "\n\n" + SOLUTION;
+
     public List<String> NOT_EMPTY_FILE_CONTENT = Arrays.asList("# TESTOUTPUT",
-            "\n" ,
-            "+ [Reverse Linked List](#reverse-linked-list)" ,
-            "<!---->" ,
-            "\n" ,
-            "## Reverse Linked List" ,
             "\n",
-            "https://leetcode.com/problems/reverse-linked-list/" ,
-            "\n" ,
-            "```java" ,
-            "while head != None:" ,
-            "    prev = head" ,
-            "    head = n_node" ,
-            "return prev" ,
+            "+ [Reverse Linked List](#reverse-linked-list)",
+            "<!---->",
+            "\n",
+            "## Reverse Linked List",
+            "\n",
+            "https://leetcode.com/problems/reverse-linked-list/",
+            "\n",
+            "```java",
+            "while head != None:",
+            "    prev = head",
+            "    head = n_node",
+            "return prev",
             "```");
 
     @Test
@@ -51,5 +55,7 @@ class SolutionFileTest {
 
     @Test
     void testToString() {
+        SolutionFile result = SolutionFile.parseFile(NOT_EMPTY_FILE_CONTENT, Solution.FileType.MARKDOWN, "output");
+        assertEquals(RESULT_STRING, result.toString());
     }
 }

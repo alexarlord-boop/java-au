@@ -17,7 +17,6 @@ public class SolutionFile {
     }
 
     private static List<ItemEntity> parseMD(List<String> content) {
-        System.out.println("entered PARSER");
         List<ItemEntity> lst = new ArrayList<>();
         List<String> titles = new ArrayList<>();
         List<String> links = new ArrayList<>();
@@ -28,7 +27,6 @@ public class SolutionFile {
         int i = 0;
         while (i < delimeterId) {
             String line = content.get(i);
-            System.out.println(line);
             if (line.contains("+ [")) {
                 titles.add(line.split("[\\[\\]]")[1]);
             }
@@ -73,7 +71,6 @@ public class SolutionFile {
             case LATEX -> dataList = parseLATEX(content);
             default -> throw new IllegalStateException("Unexpected value: " + fileFormat);
         }
-        System.out.println(dataList);
 
         return new SolutionFile(dataList, fileFormat, fileName);
     }
