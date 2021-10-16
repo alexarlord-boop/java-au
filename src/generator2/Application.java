@@ -2,7 +2,7 @@ package generator2;
 
 import java.util.List;
 
-public class Solution {
+public class Application {
 
     enum FileType {
         MARKDOWN("<!---->"),
@@ -21,14 +21,18 @@ public class Solution {
 
     }
 
+    public static String generateContent(List<String> oldContent, List<String> newContent, FileType fileType, String fileName) {
+        SolutionFile old = SolutionFile.parseFile(oldContent, fileType, fileName);
+        old.add(MarkdownEntity.parseEntity(newContent));
+        return old.toString();
+    }
+
     public static void main(String[] args) {
         String userSource = "";
         String source = "";
         List<String> userSolutionContent = IOUtil.readData(userSource);
         List<String> oldFileContent = IOUtil.readData(source);
 
-        SolutionFile old = SolutionFile.parseFile(oldFileContent, FileType.MARKDOWN, "testOutput");
-        old.add(MarkdownEntity.parseEntity(userSolutionContent));
-        IOUtil.writeData(source, old.toString());
+        IOUtil.writeData(source, generateContent(oldFileContent, userSolutionContent, FileType.MARKDOWN, "output"));
     }
 }

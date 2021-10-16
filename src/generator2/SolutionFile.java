@@ -7,10 +7,10 @@ import java.util.Objects;
 public class SolutionFile {
 
     final List<ItemEntity> data;
-    private final Solution.FileType fileFormat;
+    private final Application.FileType fileFormat;
     private final String fileName;
 
-    public SolutionFile(List<ItemEntity> dataList, Solution.FileType fileFormat, String fileName) {
+    public SolutionFile(List<ItemEntity> dataList, Application.FileType fileFormat, String fileName) {
         this.data = dataList;
         this.fileFormat = fileFormat;
         this.fileName = fileName;
@@ -23,7 +23,7 @@ public class SolutionFile {
 
         int contentSize = content.size();
         int taskCount = 0;
-        int delimeterId = content.indexOf(Solution.FileType.MARKDOWN.FCOMMENT());
+        int delimeterId = content.indexOf(Application.FileType.MARKDOWN.FCOMMENT());
         int i = 0;
         while (i < delimeterId) {
             String line = content.get(i);
@@ -63,7 +63,7 @@ public class SolutionFile {
         return lst;
     }
 
-    public static SolutionFile parseFile(List<String> content, Solution.FileType fileFormat, String fileName) {
+    public static SolutionFile parseFile(List<String> content, Application.FileType fileFormat, String fileName) {
         List<ItemEntity> dataList;
         switch (fileFormat) {
             case MARKDOWN -> dataList = parseMD(content);
@@ -85,7 +85,7 @@ public class SolutionFile {
         String solutions = String.join("\n\n", this.data.stream().map(ItemEntity::getFormatted).toArray(String[]::new));
 
         sB.append("# ").append(this.fileName.toUpperCase()).append("\n\n").append(titles).append("\n").
-                append(Solution.FileType.MARKDOWN.FCOMMENT()).append("\n\n").append(solutions);
+                append(Application.FileType.MARKDOWN.FCOMMENT()).append("\n\n").append(solutions);
         return sB.toString();
     }
 
