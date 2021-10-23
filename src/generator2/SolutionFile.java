@@ -80,13 +80,17 @@ public class SolutionFile {
     }
 
     private String mdToString() {
-        StringBuilder sB = new StringBuilder();
         String titles = String.join("\n", this.data.stream().map(ItemEntity::getTitle).toArray(String[]::new));
         String solutions = String.join("\n\n", this.data.stream().map(ItemEntity::getFormatted).toArray(String[]::new));
 
-        sB.append("# ").append(this.fileName.toUpperCase()).append("\n\n").append(titles).append("\n").
-                append(Application.FileType.MARKDOWN.FCOMMENT()).append("\n\n").append(solutions);
-        return sB.toString();
+        return new StringBuilder().append("# ")
+                .append(this.fileName.toUpperCase())
+                .append("\n\n")
+                .append(titles)
+                .append("\n")
+                .append(Application.FileType.MARKDOWN.FCOMMENT())
+                .append("\n\n")
+                .append(solutions).toString();
     }
 
     private String htmlToString() {
