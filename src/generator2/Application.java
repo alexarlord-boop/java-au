@@ -2,6 +2,13 @@ package generator2;
 
 import java.util.List;
 
+class Generator{
+    public static String generateContent(List<String> oldContent, List<String> newContent, Application.FileType fileType, String fileName) {
+        SolutionFile old = SolutionFile.parseFile(oldContent, fileType, fileName);
+        old.add(MarkdownEntity.parseEntity(newContent));
+        return old.toString();
+    }
+}
 public class Application {
 
     enum FileType {
@@ -21,11 +28,6 @@ public class Application {
 
     }
 
-    public static String generateContent(List<String> oldContent, List<String> newContent, FileType fileType, String fileName) {
-        SolutionFile old = SolutionFile.parseFile(oldContent, fileType, fileName);
-        old.add(MarkdownEntity.parseEntity(newContent));
-        return old.toString();
-    }
 
     public static void main(String[] args) {
         String userSource = "";
@@ -33,6 +35,6 @@ public class Application {
         List<String> newContent = IOUtil.readData(userSource);
         List<String> oldContent = IOUtil.readData(source);
 
-        IOUtil.writeData(source, generateContent(oldContent, newContent, FileType.MARKDOWN, "output"));
+        IOUtil.writeData(source, Generator.generateContent(oldContent, newContent, FileType.MARKDOWN, "output"));
     }
 }

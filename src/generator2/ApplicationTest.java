@@ -41,6 +41,6 @@ class ApplicationTest {
 
     @Test
     void generateContent() {
-        assertEquals(RESULT, Application.generateContent(OLD_CONTENT, USER_CONTENT, Application.FileType.MARKDOWN, "testoutput"));
+        assertEquals(RESULT, Generator.generateContent(OLD_CONTENT, USER_CONTENT, Application.FileType.MARKDOWN, "testoutput"));
     }
 }
