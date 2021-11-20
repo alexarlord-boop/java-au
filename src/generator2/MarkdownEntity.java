@@ -19,7 +19,7 @@ public class MarkdownEntity implements ItemEntity {
         if (s.size() < 5) {
             return new MarkdownEntity("", "", "");
         }
-        String solution = "```java" + "\n" + String.join("\n", s.subList(4, s.size())) + "```\n";
+        String solution = "```java" + "\n" + String.join("\n", s.subList(4, s.size())) + "\n```\n";
         return new MarkdownEntity(s.get(0), s.get(2), solution);
     }
 
