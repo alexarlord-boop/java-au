@@ -1,6 +1,7 @@
 # LINKED LIST
 
 + [Reverse linked list](#reverse-linked-list)
++ [Middle of the Linked List](#middle-of-the-linked-list)
 <!---->
 
 ## Reverse linked list
@@ -32,4 +33,23 @@ public ListNode reverseList(ListNode head) {
 
     return reversed;
 }
+```
+
+
+## Middle of the Linked List
+
+https://leetcode.com/problems/middle-of-the-linked-list/submissions/
+
+```java
+
+public ListNode middleNode(ListNode head) {
+
+        ListNode s = head;
+        ListNode f = head;
+        while(f != null && f.next != null) {
+            f = f.next.next;
+            s = s.next;
+        }
+        return s;
+    }
 ```
