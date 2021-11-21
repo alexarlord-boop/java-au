@@ -12,6 +12,14 @@
 
 https://leetcode.com/problems/reverse-linked-list/
 
+<details>
+    <summary> Test Cases </summary>
+
+    ``` java
+
+    ``` 
+</details>
+
 ```java
 
 public ListNode reverseList(ListNode head) {
@@ -43,6 +51,14 @@ public ListNode reverseList(ListNode head) {
 
 https://leetcode.com/problems/middle-of-the-linked-list/
 
+<details>
+    <summary> Test Cases </summary>
+
+    ``` java
+
+    ``` 
+</details>
+
 ```java
 
 public ListNode middleNode(ListNode head) {
@@ -61,6 +77,14 @@ public ListNode middleNode(ListNode head) {
 ## Palindrome Linked List
 
 https://leetcode.com/problems/palindrome-linked-list/
+
+<details>
+    <summary> Test Cases </summary>
+
+    ``` java
+
+    ``` 
+</details>
 
 ```java
 
@@ -104,6 +128,14 @@ public boolean isPalindrome(ListNode head) {
 
 https://leetcode.com/problems/merge-two-sorted-lists/
 
+<details>
+    <summary> Test Cases </summary>
+
+    ``` java
+
+    ``` 
+</details>
+
 ```java
 
 public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
@@ -125,6 +157,14 @@ public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
 ## Intersection of Two Linked Lists
 
 https://leetcode.com/problems/intersection-of-two-linked-lists/
+
+<details>
+    <summary> Test Cases </summary>
+
+    ``` java
+
+    ``` 
+</details>
 
 ```java
 
@@ -157,6 +197,14 @@ public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
 ## Sort List
 
 https://leetcode.com/problems/sort-list/
+
+<details>
+    <summary> Test Cases </summary>
+
+    ``` java
+
+    ``` 
+</details>
 
 ```java
 

@@ -21,7 +21,7 @@ public class MarkdownEntity implements ItemEntity {
                 "    ``` java\n" +
                 "    \n" +
                 "    ``` \n" +
-                "</details>\n";
+                "</details>";
     }
 
     public static MarkdownEntity parseEntity(List<String> s) {
