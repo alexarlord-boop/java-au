@@ -4,6 +4,7 @@
 + [Middle of the Linked List](#middle-of-the-linked-list)
 + [Palindrome Linked List](#palindrome-linked-list)
 + [Merge Two Sorted Lists](#merge-two-sorted-lists)
++ [Intersection of Two Linked Lists](#intersection-of-two-linked-lists)
 <!---->
 
 ## Reverse linked list
@@ -11,7 +12,6 @@
 https://leetcode.com/problems/reverse-linked-list/
 
 ```java
-
 
 public ListNode reverseList(ListNode head) {
     if (head == null) {
@@ -105,7 +105,6 @@ https://leetcode.com/problems/merge-two-sorted-lists/
 
 ```java
 
-
 public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
     ListNode res = new ListNode(0);
     ListNode tail = res, p1 = l1, p2 = l2;
@@ -119,4 +118,36 @@ public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
     return res.next;
 }
 
+```
+
+
+## Intersection of Two Linked Lists
+
+https://leetcode.com/problems/intersection-of-two-linked-lists/
+
+```java
+
+public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        if(headA == null || headB == null) return null;
+
+        Set<ListNode> nodes = new HashSet<>();
+
+        while(headA != null)
+        {
+            nodes.add(headA);
+            headA = headA.next;
+        }
+
+        while(headB != null)
+        {
+            if(nodes.contains(headB))
+            {
+                return headB;
+            }
+
+            headB = headB.next;
+        }
+
+        return null;
+}
 ```
