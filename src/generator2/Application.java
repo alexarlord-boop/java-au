@@ -31,7 +31,7 @@ public class Application {
 
     public static void main(String[] args) {
         String userSource = "C:\\Users\\Александр\\IdeaProjects\\java_au\\src\\generator2\\input.txt";
-        String source = "C:\\Users\\Александр\\IdeaProjects\\java_au\\src\\generator2\\linked-list.txt";
+        String source = "C:\\Users\\Александр\\IdeaProjects\\java_au\\src\\generator2\\linked-list.md";
         List<String> newContent = IOUtil.readData(userSource);
         List<String> oldContent = IOUtil.readData(source);
 
