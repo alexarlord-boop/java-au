@@ -8,11 +8,20 @@ public class MarkdownEntity implements ItemEntity {
     private final String taskTitle;
     private final String taskUrl;
     private final String taskSolution;
+    private final String testCases;
 
     public MarkdownEntity(String title, String url, String solution) {
         this.taskTitle = title;
         this.taskUrl = url;
         this.taskSolution = solution;
+
+        this.testCases = "<details>\n" +
+                "    <summary> Test Cases </summary>\n" +
+                "\n" +
+                "    ``` java\n" +
+                "    \n" +
+                "    ``` \n" +
+                "</details>\n";
     }
 
     public static MarkdownEntity parseEntity(List<String> s) {
@@ -30,7 +39,8 @@ public class MarkdownEntity implements ItemEntity {
 
     @Override
     public String getFormatted() {
-        return "## " + this.taskTitle + "\n\n" + this.taskUrl + "\n\n" + this.taskSolution;
+
+        return "## " + this.taskTitle + "\n\n" + this.taskUrl + "\n\n" + this.testCases +"\n\n" + this.taskSolution;
     }
 
     @Override
