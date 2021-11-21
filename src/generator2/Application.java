@@ -35,6 +35,6 @@ public class Application {
         List<String> newContent = IOUtil.readData(userSource);
         List<String> oldContent = IOUtil.readData(source);
 
-        IOUtil.writeData(source, Generator.generateContent(oldContent, newContent, FileType.MARKDOWN, "output"));
+        IOUtil.writeData(source, Generator.generateContent(oldContent, newContent, FileType.MARKDOWN, "linked list"));
     }
 }
