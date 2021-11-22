@@ -34,8 +34,8 @@ class LeetcodeSolutionTest {
 
     @Test
     void testReverseList() {
-        ListNode expected = buildList(List.of(1, 2, 2, 2, 3));
-        assertEquals(expected, solution.reverseList(buildList(List.of(3, 2, 2, 2, 1))));
+        ListNode expected = ListNodeHandler.buildList(List.of(1, 2, 2, 2, 3));
+        assertEquals(expected, solution.reverseList(ListNodeHandler.buildList(List.of(3, 2, 2, 2, 1))));
     }
 
     @Test
@@ -45,11 +45,12 @@ class LeetcodeSolutionTest {
 ```
 
 ```java
-    private ListNode buildList(List<Integer> src) {
+class ListNodeHandler{
+    static ListNode buildList(List<Integer> src) {
         ListNode prev = null;
         ListNode node = null;
         int d = src.size() - 1;
-        for (int i = 0; i <= d; i++) {
+        for (int i = d; i >= 0; i--) {
             node = new ListNode(src.get(i), prev);
             prev = node;
         }
@@ -113,13 +114,13 @@ class LeetcodeSolutionTest {
     @Test
     void testMiddleNode() {
         ListNode expect = buildList(List.of(2, 3));
-        assertEquals(expect, solution.middleNode(buildList(List.of(1, 2, 3))));
+        assertEquals(expect, solution.middleNode(ListNodeHandler.buildList(List.of(1, 2, 3))));
     }
 
     @Test
     void testTwoMiddleNodes() {
         ListNode expect = buildList(List.of(4, 5, 6));
-        assertEquals(expect, solution.middleNode(buildList(List.of(1, 2, 3, 4, 5, 6))));
+        assertEquals(expect, solution.middleNode(ListNodeHandler.buildList(List.of(1, 2, 3, 4, 5, 6))));
     }
 
     @Test
@@ -129,7 +130,8 @@ class LeetcodeSolutionTest {
 ```
 
 ```java
-    private ListNode buildList(List<Integer> src) {
+class ListNodeHandler{
+    static ListNode buildList(List<Integer> src) {
         ListNode prev = null;
         ListNode node = null;
         int d = src.size() - 1;
@@ -165,9 +167,54 @@ https://leetcode.com/problems/palindrome-linked-list/
 <details>
     <summary> Test Cases </summary>
 
-    ``` java
+``` java
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-    ``` 
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+
+class LeetcodeSolutionTest {
+    private LeetcodeSolution solution;
+
+    @BeforeEach
+    void setSolution() {
+        solution = new LeetcodeSolution();
+    }
+
+    @Test
+    void testIsPalindrome() {
+        assertTrue(solution.isPalindrome(ListNodeHandler.buildList(List.of(1, 2, 3, 2, 1))));
+    }
+
+    @Test
+    void testIsNotPalindrome(){
+        assertFalse(solution.isPalindrome(ListNodeHandler.buildList(List.of(1, 2, 3, 4))));
+    }
+
+    @Test
+    void testNullList(){
+        assertTrue(solution.isPalindrome(ListNodeHandler.buildList(List.of())));
+    }
+    
+}
+```
+```java
+class ListNodeHandler{
+    static ListNode buildList(List<Integer> src) {
+        ListNode prev = null;
+        ListNode node = null;
+        int d = src.size() - 1;
+        for (int i = d; i >= 0; i--) {
+            node = new ListNode(src.get(i), prev);
+            prev = node;
+        }
+        return node;
+    }
+}
+``` 
 </details>
 
 ```java
