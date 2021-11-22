@@ -326,7 +326,7 @@ public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
     ListNode res = new ListNode(0);
     ListNode tail = res, p1 = l1, p2 = l2;
     while (p1 != null && p2 != null) {
-        tail.next = new ListNode(p1.val < p2.val ? p1.val : p2.val);
+        tail.next = new ListNode(Math.min(p1.val, p2.val));
         tail = tail.next;
         if (p1.val < p2.val) p1 = p1.next;
         else p2 = p2.next;
@@ -345,9 +345,54 @@ https://leetcode.com/problems/intersection-of-two-linked-lists/
 <details>
     <summary> Test Cases </summary>
 
-    ``` java
+``` java
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-    ``` 
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+
+class LeetcodeSolutionTest {
+    private LeetcodeSolution solution;
+
+    @BeforeEach
+    void setSolution() {
+        solution = new LeetcodeSolution();
+    }
+
+    @Test
+    void testGetIntersectionNode() {
+        ListNode l1 = ListNodeHandler.buildList(List.of(2, 6, 4));
+        ListNode l2 = ListNodeHandler.buildList(List.of(1, 5));
+        assertEquals(null, solution.getIntersectionNode(l1, l2));
+    }
+
+    @Test
+    void testGetIntersectionNode2() {
+        ListNode l1 = ListNodeHandler.buildList(List.of(2, 6, 4));
+        ListNode l2 = ListNodeHandler.buildList(List.of(1, 2, 6, 4));
+        assertEquals(2, solution.getIntersectionNode(l1, l2));
+    }
+
+}
+```
+```java
+
+class ListNodeHandler {
+    static ListNode buildList(List<Integer> src) {
+        ListNode prev = null;
+        ListNode node = null;
+        int d = src.size() - 1;
+        for (int i = d; i >= 0; i--) {
+            node = new ListNode(src.get(i), prev);
+            prev = node;
+        }
+        return node;
+    }
+}
+``` 
 </details>
 
 ```java
@@ -378,9 +423,67 @@ public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
 ```
 
 
-## Sort List
+## Merge Sort 
 
 https://leetcode.com/problems/sort-list/
+
+<details>
+    <summary> Test Cases </summary>
+
+``` java
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+
+class LeetcodeSolutionTest {
+    private LeetcodeSolution solution;
+
+    @BeforeEach
+    void setSolution() {
+        solution = new LeetcodeSolution();
+    }
+
+    @Test
+    void testSortList() {
+        ListNode l1 = ListNodeHandler.buildList(List.of(1, 4, 3, 2));
+        ListNode res = ListNodeHandler.buildList(List.of(1, 2, 3, 4));
+        assertEquals(res, solution.sortList(l1));
+    }
+
+    @Test
+    void testSortNullList() {
+        assertNull(solution.sortList(null));
+    }
+
+    @Test
+    void testSortEqList() {
+        ListNode res = ListNodeHandler.buildList(List.of(1, 1, 1, 1));
+        ListNode l1 = ListNodeHandler.buildList(List.of(1, 1, 1, 1));
+        assertEquals(res, solution.sortList(l1));
+    }
+
+}
+```
+```java
+
+class ListNodeHandler {
+    static ListNode buildList(List<Integer> src) {
+        ListNode prev = null;
+        ListNode node = null;
+        int d = src.size() - 1;
+        for (int i = d; i >= 0; i--) {
+            node = new ListNode(src.get(i), prev);
+            prev = node;
+        }
+        return node;
+    }
+}
+```
+</details>
 
 ```java
 
