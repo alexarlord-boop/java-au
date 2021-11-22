@@ -15,9 +15,48 @@ https://leetcode.com/problems/reverse-linked-list/
 <details>
     <summary> Test Cases </summary>
 
-    ``` java
+``` java
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-    ``` 
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+
+class LeetcodeSolutionTest {
+    private LeetcodeSolution solution;
+
+    @BeforeEach
+    void setSolution() {
+        solution = new LeetcodeSolution();
+    }
+
+    @Test
+    void testReverseList() {
+        ListNode expected = buildList(List.of(1, 2, 2, 2, 3));
+        assertEquals(expected, solution.reverseList(buildList(List.of(3, 2, 2, 2, 1))));
+    }
+
+    @Test
+    void testNullHead() {
+        assertNull(solution.reverseList(null));
+    }
+```
+
+```java
+    private ListNode buildList(List<Integer> src) {
+        ListNode prev = null;
+        ListNode node = null;
+        int d = src.size() - 1;
+        for (int i = 0; i <= d; i++) {
+            node = new ListNode(src.get(i), prev);
+            prev = node;
+        }
+        return node;
+    }
+}
+``` 
 </details>
 
 ```java
@@ -197,14 +236,6 @@ public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
 ## Sort List
 
 https://leetcode.com/problems/sort-list/
-
-<details>
-    <summary> Test Cases </summary>
-
-    ``` java
-
-    ``` 
-</details>
 
 ```java
 
