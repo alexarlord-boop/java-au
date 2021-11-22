@@ -262,9 +262,62 @@ https://leetcode.com/problems/merge-two-sorted-lists/
 <details>
     <summary> Test Cases </summary>
 
-    ``` java
+``` java
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-    ``` 
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+
+class LeetcodeSolutionTest {
+    private LeetcodeSolution solution;
+
+    @BeforeEach
+    void setSolution() {
+        solution = new LeetcodeSolution();
+    }
+
+    @Test
+    void testMergeTwoLists() {
+        ListNode l1 = ListNodeHandler.buildList(List.of(1, 2));
+        ListNode l2 = ListNodeHandler.buildList(List.of(3, 4));
+        ListNode res = ListNodeHandler.buildList(List.of(1, 2, 3, 4));
+        assertEquals(res, solution.mergeTwoLists(l1, l2));
+    }
+
+    @Test
+    void testMergeOneList() {
+        ListNode l2 = ListNodeHandler.buildList(List.of(3, 4));
+        ListNode res = ListNodeHandler.buildList(List.of(3, 4));
+        assertEquals(res, solution.mergeTwoLists(null, l2));
+    }
+
+    @Test
+    void testMergeEqualLists() {
+        ListNode l1 = ListNodeHandler.buildList(List.of(1, 2, 3));
+        ListNode res = ListNodeHandler.buildList(List.of(1, 1, 2, 2, 3, 3));
+        assertEquals(res, solution.mergeTwoLists(l1, l1));
+    }
+
+}
+
+```
+```java
+class ListNodeHandler {
+    static ListNode buildList(List<Integer> src) {
+        ListNode prev = null;
+        ListNode node = null;
+        int d = src.size() - 1;
+        for (int i = d; i >= 0; i--) {
+            node = new ListNode(src.get(i), prev);
+            prev = node;
+        }
+        return node;
+    }
+}
+``` 
 </details>
 
 ```java
