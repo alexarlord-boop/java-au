@@ -93,9 +93,54 @@ https://leetcode.com/problems/middle-of-the-linked-list/
 <details>
     <summary> Test Cases </summary>
 
-    ``` java
+``` java
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-    ``` 
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+
+class LeetcodeSolutionTest {
+    private LeetcodeSolution solution;
+
+    @BeforeEach
+    void setSolution() {
+        solution = new LeetcodeSolution();
+    }
+
+    @Test
+    void testMiddleNode() {
+        ListNode expect = buildList(List.of(2, 3));
+        assertEquals(expect, solution.middleNode(buildList(List.of(1, 2, 3))));
+    }
+
+    @Test
+    void testTwoMiddleNodes() {
+        ListNode expect = buildList(List.of(4, 5, 6));
+        assertEquals(expect, solution.middleNode(buildList(List.of(1, 2, 3, 4, 5, 6))));
+    }
+
+    @Test
+    void testNullHead() {
+        assertNull(solution.middleNode(null));
+    }
+```
+
+```java
+    private ListNode buildList(List<Integer> src) {
+        ListNode prev = null;
+        ListNode node = null;
+        int d = src.size() - 1;
+        for (int i = d; i >= 0; i--) {
+            node = new ListNode(src.get(i), prev);
+            prev = node;
+        }
+        return node;
+    }
+}
+``` 
 </details>
 
 ```java
