@@ -5,7 +5,7 @@
 + [Palindrome Linked List](#palindrome-linked-list)
 + [Merge Two Sorted Lists](#merge-two-sorted-lists)
 + [Intersection of Two Linked Lists](#intersection-of-two-linked-lists)
-+ [Sort List](#sort-list)
++ [Merge sort](#merge-sort)
 <!---->
 
 ## Reverse linked list
