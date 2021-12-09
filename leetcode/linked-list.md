@@ -7,6 +7,7 @@
 + [Intersection of Two Linked Lists](#intersection-of-two-linked-lists)
 + [Merge sort](#merge-sort)
 + [Reorder List](#reorder-list)
++ [Linked List Cycle II](#linked-list-cycle-ii)
 <!---->
 
 ## Reverse linked list
@@ -611,5 +612,41 @@ public void reorderList(ListNode head) {
             p=tmp;
         }
         stack.pop().next=null;
+}
+```
+
+
+
+## Linked List Cycle II
+
+https://leetcode.com/problems/linked-list-cycle-ii/
+
+<details>
+    <summary> Test Cases </summary>
+
+    ``` java
+    
+    ``` 
+</details>
+
+```java
+public ListNode detectCycle(ListNode head) {
+    if (head == null || head.next == null) {
+        return null;   // no circle
+    }
+
+    ListNode slow = head, fast = head;
+    while (fast != null && fast.next != null) {
+        fast = fast.next.next;
+        slow = slow.next;
+        if (fast == slow) { 
+            while (head != fast) {
+                fast = fast.next;
+                head = head.next;
+            }
+            return head;
+        }
+    }
+    return null;
 }
 ```
