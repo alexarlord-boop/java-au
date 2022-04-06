@@ -58,3 +58,37 @@ public List<String> topKFrequent(String[] words, int k) {
             .collect(Collectors.toList());
 }
 ```
+
+```java
+import java.util.List;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+
+public class Main
+{
+    public static void main(String[] args) {
+        String[] ts1 = {"I", "love", "coding", "I", "really", "do"};
+        System.out.println(Arrays.toString(ts1));
+        System.out.println(topKFrequent(ts1, 2));
+        
+        String[] ts2 = {"A", "C", "B", "B", "C", "A", "A"};
+        System.out.println(Arrays.toString(ts2));
+        System.out.println(topKFrequent(ts2, 1));
+        
+    }
+    
+    public static List<String> topKFrequent(String[] words, int k) {
+    return Arrays.stream(words)
+            .collect(Collectors.groupingBy(w -> w, Collectors.counting()))
+            .entrySet()
+            .stream()
+            .sorted(Map.Entry.<String,Long>comparingByValue().reversed()
+                       .thenComparing(Map.Entry.<String,Long>comparingByKey()))
+            .map(Map.Entry::<String,Long>getKey)
+            .limit(k)
+            .collect(Collectors.toList());
+}
+}
+```
