@@ -6,165 +6,97 @@
 
 [more examples here](https://github.com/alexarlord-boop/java-au/tree/master/leetcode)
 
+# STREAM
 
-# DESIGN
-
-+ [Implement Stack using Queues](#implement-stack-using-queues)
-+ [Min Stack](#min-stack)
-+ [Implement Queue using Stacks](#implement-queue-using-stacks)
++ [Top K Frequent Words](#top-k-frequent-words)
 <!---->
 
-## Implement Stack using Queues
+## Top K Frequent Words
 
-https://leetcode.com/problems/implement-stack-using-queues/
+https://leetcode.com/problems/top-k-frequent-words/
 
 <details>
     <summary> Test Cases </summary>
 
-    ``` java
-    
-    ``` 
+``` java
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+
+class LeetcodeSolutionTest {
+    private LeetcodeSolution solution;
+
+    @BeforeEach
+    void setSolution() {
+        solution = new LeetcodeSolution();
+    }
+
+    @Test
+    void testFirstCaseTopKFrequent(){
+        int k = 2;
+        String[] words = new String[] {"i","love","leetcode","i","love","coding"};
+        assertEquals(List.of("i","love"), solution.topKFrequent(words, k));
+    }
+
+    @Test
+    void testSecondCaseTopKFrequent(){
+        int k = 4;
+        String[] words = new String[] {"the","day","is","sunny","the","the","the","sunny","is","is"};
+        assertEquals(List.of("the","is","sunny","day"), solution.topKFrequent(words, k));
+    }
+
+}    
+``` 
 </details>
 
 ```java
-class MyStack {
-    Queue<Integer> q;
-
-    public MyStack() {
-        q = new ArrayDeque<>();
-    }
-
-    public void push(int x) {
-        q.add(x);
-        int n = q.size();
-
-        while (n-- > 1) {
-            q.add(q.poll());
-        }
-    }
-
-    public int pop() {
-        return q.poll();
-    }
-
-    public int top() {
-        return q.peek();
-    }
-
-    public boolean empty() {
-        return q.isEmpty();
-    }
+public List<String> topKFrequent(String[] words, int k) {
+    return Arrays.stream(words)
+            .collect(Collectors.groupingBy(w -> w, Collectors.counting()))
+            .entrySet()
+            .stream()
+            .sorted(Map.Entry.<String,Long>comparingByValue().reversed()
+                       .thenComparing(Map.Entry.<String,Long>comparingByKey()))
+            .map(Map.Entry::<String,Long>getKey)
+            .limit(k)
+            .collect(Collectors.toList());
 }
 ```
 
-
-## Min Stack
-
-https://leetcode.com/problems/min-stack/
-
-<details>
-    <summary> Test Cases </summary>
-
-    ``` java
-    
-    ``` 
-</details>
-
 ```java
-class MinStack {
-    class Element {
-        int val;
-        int minn;
-        Element next;
+import java.util.List;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.stream.Collectors;
 
-        public Element(int val, int minn) {
-            this.val = val;
-            this.minn = minn;
-        }
+
+public class Main
+{
+    public static void main(String[] args) {
+        String[] ts1 = {"I", "love", "coding", "I", "really", "do"};
+        System.out.println(Arrays.toString(ts1));
+        System.out.println(topKFrequent(ts1, 2));
+        
+        String[] ts2 = {"A", "C", "B", "B", "C", "A", "A"};
+        System.out.println(Arrays.toString(ts2));
+        System.out.println(topKFrequent(ts2, 1));
+        
     }
-
-    Element top = null;
-
-    public void push(int x) {
-        if (top == null) {
-            top = new Element(x, x);
-        } else {
-            Element e = new Element(x, Math.min(x, top.minn));
-            e.next = top;
-            top = e;
-        }
-    }
-
-    public void pop() {
-        if (top == null) {
-            return;
-        } else {
-            Element temp = top.next;
-            top = temp;
-        }
-    }
-
-    public int top() {
-        if (top == null) {
-            return -1;
-        } else {
-            return top.val;
-        }
-    }
-
-    public int getMin() {
-        if (top == null) {
-            return -1;
-        } else {
-            return top.minn;
-        }
-    }
+    
+    public static List<String> topKFrequent(String[] words, int k) {
+    return Arrays.stream(words)
+            .collect(Collectors.groupingBy(w -> w, Collectors.counting()))
+            .entrySet()
+            .stream()
+            .sorted(Map.Entry.<String,Long>comparingByValue().reversed()
+                       .thenComparing(Map.Entry.<String,Long>comparingByKey()))
+            .map(Map.Entry::<String,Long>getKey)
+            .limit(k)
+            .collect(Collectors.toList());
 }
-```
-
-
-## Implement Queue using Stacks
-
-https://leetcode.com/problems/implement-queue-using-stacks/
-
-<details>
-    <summary> Test Cases </summary>
-
-    ``` java
-    
-    ``` 
-</details>
-
-```java
-class MyQueue {
-    Deque<Integer> inStack;
-    Deque<Integer> outStack;
-
-    public MyQueue() {
-        inStack = new ArrayDeque<>();
-        outStack = new ArrayDeque<>();
-    }
-
-    public void push(int x) {
-        inStack.push(x);
-    }
-
-    public int pop() {
-        peek();
-        return outStack.pop();
-    }
-
-    public int peek() {
-        if (outStack.isEmpty()) {
-            while (!inStack.isEmpty()) {
-                outStack.push(inStack.pop());
-            }
-        }
-        return outStack.peek();
-    }
-
-    public boolean empty() {
-        return inStack.isEmpty() && outStack.isEmpty();
-    }
 }
 ```
