@@ -4,8 +4,7 @@
 - I have learned basic algorithms and data structures thanks to this course.
 - Also, I created a Markdown generator to make results look beautiful 🥳
 
-
-# *Example*
+[more examples here](https://github.com/alexarlord-boop/java-au/tree/master/leetcode)
 
 
 # DESIGN
