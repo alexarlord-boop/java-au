@@ -5,7 +5,7 @@
 - Also, I created a Markdown generator to make results look beautiful 🥳
 
 
-# Solution Example
+# *Example*
 
 
 # DESIGN
